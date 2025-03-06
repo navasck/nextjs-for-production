@@ -1,49 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with
-[`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+https://medium.com/@jan.hesters/how-to-set-up-next-js-15-for-production-in-2024-347f542922b4
+
 
 ## Getting Started
+npx create-next-app@latest
 
-First, run the development server:
+## Type Checks With TypeScript
+"type-check": "tsc -b"
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Code Formatting : Prettier is an opinionated code formatter that eliminates style discussions during code reviews.
+npm install --save-dev prettier prettier-plugin-tailwindcss
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the
-result.
+Create aprettier.config.js file with your preferred rules.
 
-You can start editing the page by modifying `app/page.tsx`. The page
-auto-updates as you edit the file.
+"format": "prettier --write .",
 
-This project uses
-[`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts)
-to automatically optimize and load [Geist](https://vercel.com/font), a new font
-family for Vercel.
+## ESLint : ESLint can scan your code for both stylistic and logical issues. Install ESLint and its plugins, like unicorn, playwright and import sort.
+npm install --save-dev @typescript-eslint/parser eslint-plugin-unicorn eslint-plugin-import eslint-plugin-playwright eslint-config-prettier eslint-plugin-prettier eslint-plugin-simple-import-sort
 
-## Learn More
+.eslintrc.json
 
-To learn more about Next.js, take a look at the following resources:
+"lint:fix": "next lint --fix",
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
-  features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Commitlint : Install Commitlint and its necessary configurations. This includes Husky, which helps manage Git hooks.
+npm install --save-dev @commitlint/cli@latest @commitlint/config-conventional@latest husky@latest
 
-You can check out
-[the Next.js GitHub repository](https://github.com/vercel/next.js) - your
-feedback and contributions are welcome!
+Initialize Husky in your project to set up the basic configuration.
+        npx husky-init && npm install
 
+Add hooks to automate linting and type checking before each commit, and customize your commit message workflow.
+
+        npx husky add .husky/pre-commit 'npm run lint && npm run type-check'
+        npx husky add .husky/prepare-commit-msg 'exec < /dev/tty && npx cz --hook || true'
+
+The pre-commit hook runs after git commit, but before the commit message is finalized and runs linting and type-checking on your code.
+
+The prepare-commit-msg hook runs after git commit is initiated but before the commit message editor opens. It runs commitizen CLI to let you craft conventional commit messages. You'll learn how to use this hook in a bit.
+
+Remove the line that says npm test from .husky/_/pre-commit.
+
+
+Make sure these scripts are executable.
+
+    chmod a+x .husky/pre-commit
+    chmod a+x .husky/prepare-commit-msg
+
+Install Commitizen, which provides a CLI for crafting conventional commit messages.
+
+    npm install --save-dev commitizen cz-conventional-changelog
+
+Create your commitlint.config.cjs file with rules that suit your team's needs. This setup ensures your commit messages are consistent and relevant to the changes made.
+
+Run the following command to start crafting your commit messages using a guided CLI.
+  $ git add --all
+  $ npx cz
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the
-[Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
-from the creators of Next.js.
 
-Check out our
-[Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying)
-for more details.
