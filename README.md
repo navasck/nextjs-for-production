@@ -70,7 +70,13 @@ https://janhesters.com/blog/12-keys-write-senior-level-tests
 create a vitest.config.ts file.
 
 
-##
+## Styling
+       npx shadcn@latest init
+Now let’s talk about styling. The two most important aspects to get right are accessibility and maintainability. One of the most popular libraries out there that nails both of these aspects is Shadcn. It uses Tailwind for streamlined style management and Radix for enhanced accessibility.
+
+For  adding components.
+
+        npx shadcn@latest add card
 ##
 
 
