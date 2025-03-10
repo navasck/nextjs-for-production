@@ -10,7 +10,8 @@
     "type-check": "tsc -b",
     "format": "prettier --write .",
     "lint:fix": "next lint --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "vitest --reporter=verbose"
   },
   "dependencies": {
     "next": "15.2.1",
@@ -22,10 +23,15 @@
     "@commitlint/config-conventional": "^19.7.1",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
     "@typescript-eslint/parser": "^8.26.0",
+    "@vitejs/plugin-react": "^4.3.4",
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9",
@@ -36,11 +42,14 @@
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-unicorn": "^57.0.0",
+    "happy-dom": "^17.2.2",
     "husky": "^8.0.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.0.7"
   },
   "config": {
     "commitizen": {
