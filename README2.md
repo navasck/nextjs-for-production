@@ -112,48 +112,60 @@ try to verify it by running npx lint-staged.
 
 Create a new file commit-msg file inside the .husky folder. and add the below content to it
 
-npx --no-install commitlint --edit $1
+            npx --no-install commitlint --edit $1
+
 Create a new file .commitlintrc.json and the below content to it
 
-{
-  "extends": [
-    "@commitlint/config-conventional"
-  ]
-}
+            {
+              "extends": [
+                "@commitlint/config-conventional"
+              ]
+            }
 Here are some examples of valid commit messages that should pass the commitlint checks:
 
 // Without Scope:
-feat: add new feature for user authentication
+
+          feat: add new feature for user authentication
 
 
 // With Scope:
-fix(api): correct API endpoint URL
+
+          fix(api): correct API endpoint URL
 
 // With Scope and Additional Details:
+
 chore(config): update ESLint configuration
+
 Ensure your commit message includes a type and a subject. For example:
 
-git commit -m "chore: Updated the eslint configuration"
-git commit -m "fix: correct spelling in README"
+          git commit -m "chore: Updated the eslint configuration"
+          git commit -m "fix: correct spelling in README"
+
+
 8. Setting Up Tailwind CSS
+
 Tailwind CSS is a utility-first CSS framework for rapid UI development. While creating nextjs project it gives options to set up tailwindcss along with nextjs project.
 
 Just onfigure tailwind.config.js:
 
-module.exports = {
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-};
+                module.exports = {
+                  content: [
+                    './pages/**/*.{js,ts,jsx,tsx}',
+                    './components/**/*.{js,ts,jsx,tsx}',
+                  ],
+                  theme: {
+                    extend: {},
+                  },
+                  plugins: [],
+                };
+
+
 9. Setting Up ShadCN UI
+
 ShadCN is a component library for accessible, customizable UI. To set it up run the below command
 
-npx shadcn@latest init
+                  npx shadcn@latest init
+
 You will be asked a few questions to configure components.json:
 
 Which style would you like to use? › Default
@@ -161,108 +173,115 @@ Which color would you like to use as base color? › Neutral
 Do you want to use CSS variables for colors? › yes
 You can now start adding components to your project.
 
-npx shadcn@latest add button
+                  npx shadcn@latest add button
+
 The command above will add the Button component to your project. You can then import it like this:
 
-import { Button } from "@/components/ui/button"
+                  import { Button } from "@/components/ui/button"
 
-export default function Home() {
-  return (
-    <div>
-      <Button>Click me</Button>
-    </div>
-  )
-}
+                    export default function Home() {
+                      return (
+                        <div>
+                          <Button>Click me</Button>
+                        </div>
+                      )
+                    }
+
 This setup will also update the tailwind.config.ts file like below:
 
-import type { Config } from 'tailwindcss';
+                  import type { Config } from 'tailwindcss';
 
-const config: Config = {
-  darkMode: ['class'],
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
-  theme: {
-    extend: {
-      screens: {
-        xl: '1440px',
-      },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
-      },
-      colors: {
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
-        },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
-        },
-        primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
-        },
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
-        },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
-        },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
-        },
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        chart: {
-          '1': 'hsl(var(--chart-1))',
-          '2': 'hsl(var(--chart-2))',
-          '3': 'hsl(var(--chart-3))',
-          '4': 'hsl(var(--chart-4))',
-          '5': 'hsl(var(--chart-5))',
-        },
-      },
-    },
-  },
-  plugins: [require('tailwindcss-animate')],
-};
-export default config;
+                  const config: Config = {
+                    darkMode: ['class'],
+                    content: [
+                      './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+                      './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+                      './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+                    ],
+                    theme: {
+                      extend: {
+                        screens: {
+                          xl: '1440px',
+                        },
+                        backgroundImage: {
+                          'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                          'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+                        },
+                        borderRadius: {
+                          lg: 'var(--radius)',
+                          md: 'calc(var(--radius) - 2px)',
+                          sm: 'calc(var(--radius) - 4px)',
+                        },
+                        colors: {
+                          background: 'hsl(var(--background))',
+                          foreground: 'hsl(var(--foreground))',
+                          card: {
+                            DEFAULT: 'hsl(var(--card))',
+                            foreground: 'hsl(var(--card-foreground))',
+                          },
+                          popover: {
+                            DEFAULT: 'hsl(var(--popover))',
+                            foreground: 'hsl(var(--popover-foreground))',
+                          },
+                          primary: {
+                            DEFAULT: 'hsl(var(--primary))',
+                            foreground: 'hsl(var(--primary-foreground))',
+                          },
+                          secondary: {
+                            DEFAULT: 'hsl(var(--secondary))',
+                            foreground: 'hsl(var(--secondary-foreground))',
+                          },
+                          muted: {
+                            DEFAULT: 'hsl(var(--muted))',
+                            foreground: 'hsl(var(--muted-foreground))',
+                          },
+                          accent: {
+                            DEFAULT: 'hsl(var(--accent))',
+                            foreground: 'hsl(var(--accent-foreground))',
+                          },
+                          destructive: {
+                            DEFAULT: 'hsl(var(--destructive))',
+                            foreground: 'hsl(var(--destructive-foreground))',
+                          },
+                          border: 'hsl(var(--border))',
+                          input: 'hsl(var(--input))',
+                          ring: 'hsl(var(--ring))',
+                          chart: {
+                            '1': 'hsl(var(--chart-1))',
+                            '2': 'hsl(var(--chart-2))',
+                            '3': 'hsl(var(--chart-3))',
+                            '4': 'hsl(var(--chart-4))',
+                            '5': 'hsl(var(--chart-5))',
+                          },
+                        },
+                      },
+                    },
+                    plugins: [require('tailwindcss-animate')],
+                  };
+                  export default config;
+
+
 10.Next.js Plugins and Add-ons
+
 Next.js allows you to extend its functionality with plugins, such as image optimization, fonts, and analytics. For example, you can use the Next.js image component for optimizing images:
 
-import Image from 'next/image';
+                  import Image from 'next/image';
 
-export default function Home() {
-  return <Image src="/logo.png" alt="Logo" width={500} height={500} />;
-}
+                    export default function Home() {
+                      return <Image src="/logo.png" alt="Logo" width={500} height={500} />;
+                    }
+
 You can take your Next.js development to the next level by using plugins and extensions that add functionality and enhance your development workflow. Let me share some of them:
 
-next-pwa
-next-compose-plugins
-next-seo
-next-auth
-next-themes
-next-nprogress-bar
-next-i18next
-next-mdx
+                    next-pwa
+                    next-compose-plugins
+                    next-seo
+                    next-auth
+                    next-themes
+                    next-nprogress-bar
+                    next-i18next
+                    next-mdx
+
 Hope You Like this article. Big Thank you For Reading.
 
 Follow me on Medium for more guided articles.
