@@ -77,6 +77,32 @@ Now let’s talk about styling. The two most important aspects to get right are 
 For  adding components.
 
         npx shadcn@latest add card
+## internationalization — or i18n
+
+        npm install negotiator @formatjs/intl-localematcher
+        npm install --save-dev @types/negotiator
+
+https://nextjs.org/docs/app/building-your-application/routing/internationalization
+
+
+negotiator: This library helps parse the Accept-Language header from the browser to determine the user's preferred languages.
+@formatjs/intl-localematcher: This library matches the user's preferred languages with the supported locales in your application.
+middleware.ts:
+It intercepts all requests.
+It uses getLocale to determine the user's locale.
+If the URL doesn't include a locale, it redirects to the URL with the determined locale.
+[locale]/layout.tsx:
+It sets the lang attribute of the <html> tag.
+It also can pass the locale to the generateMetadata function to create dynamic metadata.
+[locale]/page.tsx:
+It uses getDictionary to load the appropriate locale's messages.
+It renders the page with the translated text.
+lib/i18n.ts:
+getLocale extracts the language from the request headers.
+getDictionary dynamically imports the locale JSON file.
+
+
+##
 ##
 
 
