@@ -102,7 +102,55 @@ getLocale extracts the language from the request headers.
 getDictionary dynamically imports the locale JSON file.
 
 
-##
+## Database
+
+This tutorial is going to use Postgres for its database because it is well battle-tested, but you’re going to use the Prisma ORM to abstract away the database layer. This gives you the flexibility to use a variety of databases, and simplifies the API that you use to interact with it.
+
+      npm install prisma --save-dev
+      npm install @prisma/client
+      npx prisma init
+
+src/lib/prisma.ts
+
+              import { PrismaClient } from '@prisma/client';
+
+              declare global {
+                var __database__: PrismaClient;
+              }
+
+              let prisma: PrismaClient;
+
+              if (process.env.NODE_ENV === 'production') {
+                prisma = new PrismaClient();
+              } else {
+                if (!global.__database__) {
+                  global.__database__ = new PrismaClient();
+                }
+                prisma = global.__database__;
+              }
+
+              export default prisma;
+
+
+The re-assignment ensures that in a non-production environment (like during development or testing), only one instance of the Prisma client is created and reused across the entire application. This approach prevents the overhead of repeatedly initializing new connections to the database every time a module that needs database access is imported.
+
+ADD BELOW COMMANDS IN PACKAGE.JSON
+
+              "prisma:deploy": "npx prisma migrate deploy && npx prisma generate",
+              "prisma:migrate": "npx prisma migrate dev --name",
+              "prisma:push": "npx prisma db push && npx prisma generate",
+              "prisma:reset-dev": "run-s prisma:wipe prisma:seed dev",
+              "prisma:seed": "tsx ./prisma/seed.ts",
+              "prisma:setup": "prisma generate && prisma migrate deploy && prisma db push",
+              "prisma:studio": "npx prisma studio",
+              "prisma:wipe": "npx prisma migrate reset --force && npx prisma db push",
+
+Some of these commands use the run-s, tsxand dotenv packages, which you’ll need to install.
+
+             npm install --save-dev npm-run-all tsx dotenv
+
+             npm run prisma:setup
+
 ##
 
 
